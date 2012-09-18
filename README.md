@@ -23,16 +23,18 @@ If you don't have that version you can add an external paper repository such
 as one from ondrej. Be sure to thank him.
 
     sudo add-apt-repository ppa:ondrej/php5
+    sudo apt-get update
+    sudo apt-get upgrade
 
 Now clone the repository from git gub.
 
     sudo apt-get install git
-		git clone https://github.com/cegme/MADden.git
+    git clone https://github.com/cegme/MADden.git
 
 Now we can start a php server locally.
 
     cd MADden/web
-		php -S localhost:8080
+    php -S localhost:8080
 
 Now point your web browser to http://localhost:8080 ahd have fun!
 
