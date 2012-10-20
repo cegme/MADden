@@ -11,7 +11,6 @@
 
 1. Give me 5 comments about a 'Tebow'  with 'negative' sentiment.
 
-Query 
 
 We first need a way to perform sentiment analysis from tweets.
 Fortunatly, we do not have to do anything new, we can use a popular 
@@ -84,4 +83,13 @@ Here is the query plan for this query.
     (3 rows)
 
 
-2. Another 
+This query shows a sophisticated query over a complicated query interface.
+
+
+2. Give me all the named entities from an arbitrary block of text.
+
+The easy way to perform this task is to use an easy tool kit such as NLTK.
+We can do they same thing using user defined functions.
+
+
+
