@@ -4,8 +4,8 @@
 
 ### Data Sets
 	
-	We scraped some statistics data from popolar NFL websites.
-	We grabbed some weekend tweets based on football terms.
+We scraped some statistics data from popular NFL websites.
+We grabbed some weekend tweets based on football terms.
 
 ### Queries
 
@@ -13,8 +13,8 @@
 
 
 We first need a way to perform sentiment analysis from tweets.
-Fortunatly, we do not have to do anything new, we can use a popular 
-API developed by smart guys at stanford.
+Fortunately, we do not have to do anything new, we can use a popular 
+API developed by smart guys at Stanford.
 We can wrap all calls to the api into a UDF.
 
     CREATE OR REPLACE FUNCTION cgrant_sentiment(t text) RETURNS character AS $$
@@ -50,7 +50,7 @@ Now we can do ad-hoc sentiment analysis on an text.
 
 
 Now to complete the query we want to search for a particular player,
-lets look for tebow. We can simply add a condition in a the where
+lets look for Tebow. We can simply add a condition in the where
 clause.
 
 
@@ -60,9 +60,9 @@ clause.
     LIMIT 5;
 
 
-If we wanted to do something a little smater. We can look for words that
+If we wanted to do something a little smarter. We can look for words that
 may contain spelling errors using qgrams. We create another UDF to take
-care of the qgram distance calculation. We could alternativley used a package
+care of the qgram distance calculation. We could alternatively used a package
 that comes with postgres called `pg_similarity`.
 
 
