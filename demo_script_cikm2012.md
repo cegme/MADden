@@ -91,5 +91,86 @@ This query shows a sophisticated query over a complicated query interface.
 The easy way to perform this task is to use an easy tool kit such as NLTK.
 We can do they same thing using user defined functions.
 
+Lets start by creating a function to tag a block of text with part of speech.
+
+
+    CREATE OR REPLACE FUNCTION cgrant_postag(doc text) RETURNS SETOF pair AS $$
+    import nltk
+    return nltk.pos_tag(nltk.word_tokenize(doc))
+    $$
+    	LANGUAGE plpythonu VOLATILE;
+
+We first tokenize and then keep the part of speech tag.
+Notice we first create a type `pair` that represents output of the function.
+This is defined as follows:
+
+    CREATE TYPE pair AS (term text, pos text);
+
+Here is an example run `SELECT cgrant_postag('The Miami Dolphins have a chance to win a superbowl');`.
+
+       term    | pos  
+    -----------+------
+     The       | DT
+     Miami     | NNP
+     Dolphins  | NNPS
+     have      | VBP
+     a         | DT
+     chance    | NN
+     to        | TO
+     win       | VB
+     a         | DT
+     superbowl | NN
+    (10 rows)
+
+
+With that experience, we can build our function.
+
+    CREATE OR REPLACE FUNCTION cgrant_ne_chunk(doc text, hardtags boolean) RETURNS SETOF netriple AS $$
+    import nltk
+    from types import TupleType
+    from django.utils.encoding import smart_unicode
+    seq = 0
+    tok = nltk.word_tokenize(smart_unicode(doc, errors='ignore'))
+    pos = nltk.pos_tag(tok)
+    chunk = nltk.ne_chunk(pos, hardtags)
+    array = []
+    for res in chunk:
+    	if isinstance(res, TupleType):
+    		array.append( (seq, res[0], res[1], None))
+    		seq += 1
+    	else:
+    		for x in res.pos():
+    			array.append((seq, x[0][0], x[0][1], x[1]))
+    		seq += 1
+    return array
+    $$
+      LANGUAGE plpythonu VOLATILE;
+
+
+First we create another type called netriple which is the return type of the named entity process.
+This is actually has for items, but triple sounds better.
+
+    CREATE TYPE netriple (termnum integer, term text, pos text, tag text);
+
+We use the python nltk function `ne_chunk` to do the named entity extraction.
+They have classifiers that are pre-trained.
+We also added a convenience method so we can either return `NE` for named entity or the type of model.
+Here is an example of this function execution.
+
+    SELECT * FROM cgrant_ne_chunk('The Miami Dolphins have a chance to win a superbowl', true);
+     termnum |   term    | pos  | tag 
+    ---------+-----------+------+-----
+           0 | The       | DT   | 
+           1 | Miami     | NNP  | NE
+           1 | Dolphins  | NNPS | NE
+           2 | have      | VBP  | 
+           3 | a         | DT   | 
+           4 | chance    | NN   | 
+           5 | to        | TO   | 
+           6 | win       | VB   | 
+           7 | a         | DT   | 
+           8 | superbowl | NN   | 
+    (10 rows)
+
 
 
