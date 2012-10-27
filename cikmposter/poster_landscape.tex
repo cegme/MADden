@@ -370,21 +370,21 @@ finish the inference over one document.
 In Greenplum, Viterbi can be run in parallel over different subsets 
 of the document on a multi-core machine.
 \begin{center}		             
-  %\begin{multicols}{2}
-      \includegraphics[height=9em,width=14em]{images/viterbip}
-      \includegraphics[height=9em,width=14em]{images/result.png}\\
-  %\end{multicols}
+      \includegraphics[height=8em,width=14em]{images/viterbip}
+      \includegraphics[height=8em,width=14em]{images/result.png}\\
 \end{center}	
-	             
+
 \fbox{%
-\[
+        \parbox{0.95\linewidth}{%
+$
 V(i,y) =
 \begin{cases}
  \max_{y^\prime}(V(i-1,y^\prime)) + \textstyle \sum_{k=1}^K \lambda_kf_k(y,y^\prime,x_i), & \text{if } i\ge0 \\
  0, & \text{if } i=-1.
 \end{cases}
-\]
-}\\
+$
+        }%
+}
 
 \fbox{%
         \parbox{0.95\linewidth}{%
@@ -415,22 +415,6 @@ $select$ $vcrf\_label('test\_segmenttbl', 'viterbi\_mtbl','viterbi\_rtbl',\\
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                          \newcommand{\compactlist}{\setlength{\itemsep}{0pt} \setlength{\parskip}{0pt} \setlength{\leftskip}{-1em}}
 
-%  \begin{multicols}{2}
-%\begin{thebibliography}{3}
-%\bibitem{Lamport94}
-%S. Sarawagi, et al. \emph {http://crf.sourceforge.net/}.
-
-%\bibitem{Lamport95}
-%Xuan-Hieu Phan, et al. \emph {FlexCRFs: Flexible Conditional Random Fields},2004.
-
-%\bibitem{Lamport94}
-%D. Z. Wang, et al.
-%	\emph {Querying probabilistic information extraction}. PVLDB, 2010.
-
-%\end{thebibliography}
-
-%  \end{multicols}
-%	 }
 	
 		\end{poster}
 		
