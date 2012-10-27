@@ -223,11 +223,13 @@ CoNLL-2000 & 30,000 & 3 MB \\
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 								We can use UDFs and use external libraries.
 
-								Here is an example query for part-of-speech tagging.
-								<QUERY1>
+								Here is an example query for part-of-speech tagging.\\
+\textit{SELECT term, pos}\\
+\textit{FROM postag(<text>)};
 
-								Here is a function for sentiment analysis. 
-								<QUERY2>
+								Here is a function for named-entity recognition.\\
+\textit{SELECT term, tag}\\
+\textit{FROM ne\_chunk(<text>);}
 
 }
 
@@ -245,42 +247,7 @@ Text Feature Extraction + Viterbi Inference\end{center}
 
                 }
 
-		 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-		  \headerbox{Acknowledgements}{name=myacknowledgements,column=0,below=myexperiment}{
-		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-		  %	  \includegraphics[width=0.85\linewidth]{T-labs-Drawing-1} 
-			  \newcommand{\compactlist}{\setlength{\itemsep}{0pt} \setlength{\parskip}{0pt} \setlength{\leftskip}{-1em}}
-
-
-Christan Grant is funded a National
-Science Foundation Graduate Research Fellowship under Grant
-No. DGE-0802270.
-This work was supported by a gift from EMC Greenplum.
-
-
-	  	}
-
-               %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                  \headerbox{References}{name=myreference,column=0,below=myacknowledgements}{
-                %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                          \newcommand{\compactlist}{\setlength{\itemsep}{0pt} \setlength{\parskip}{0pt} \setlength{\leftskip}{-1em}}
-
-%\begin{thebibliography}{3}
-%\bibitem{Lamport94}
-%S. Sarawagi, et al. \emph {http://crf.sourceforge.net/}.
-
-%\bibitem{Lamport95}
-%Xuan-Hieu Phan, et al. \emph {FlexCRFs: Flexible Conditional Random Fields},2004.
-
-%\bibitem{Lamport94}
-%D. Z. Wang, et al.
-%        \emph {Querying probabilistic information extraction}. PVLDB, 2010.
-
-%\end{thebibliography}
-%         }
-
-
-		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		  \headerbox{MADlib Text Analytics}{name=myourapproach,column=1,span=3,row=0}{
 		  %\headerbox{Parallel Text Feature Extraction}{name=myourapproach,column=1,span=3,row=0}{
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -420,6 +387,19 @@ $select$ $vcrf\_label('test\_segmenttbl', 'viterbi\_mtbl','viterbi\_rtbl',\\
   \end{multicols}
 
 		}
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		  \headerbox{Acknowledgements}{name=myacknowledgements,column=1,span=3,below=mycer} {
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		  %	  \includegraphics[width=0.85\linewidth]{T-labs-Drawing-1} 
+%			  \newcommand{\compactlist}{\setlength{\itemsep}{0pt} \setlength{\parskip}{0pt} \setlength{\leftskip}{-1em}}
+
+Christan Grant is funded by a National
+Science Foundation Graduate Research Fellowship under Grant No. DGE-0802270.
+This work was supported by a gift from EMC Greenplum.
+Thanks to C. Welton and H. Harada's code review, S. Sarawagi's work on a CRF package and N. Okazaki's work on a LBFGS implementation.
+	  	}
+
+
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                  \headerbox{References}{name=myreference,column=1,span=3,below=mycer}{
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
