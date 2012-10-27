@@ -1,6 +1,5 @@
-#!/usr/local/bin/php
 <?php
-
+include 'util.php';
 header('Content-type: application/json');
 
 // Check to see if a query was passed in
@@ -21,7 +20,8 @@ error_log($pstr."\n\n", 3, 'query_beta.log');
 
 if(isset($_GET['q'])) {
 
-	$dbconn = pg_connect("host=128.227.176.46 dbname=madlibdb user=john password=madden options='--client_encoding=UTF8'")
+	$_db = make_db_string();
+	$dbconn = pg_connect("host=".$_db->{'host'}." dbname=".$_db->{'db'}." user=".$_db->{'user'}." password=".$_db->{'pwd'}." options='--client_encoding=UTF8'")
     or die('Could not connect: ' . pg_last_error());
 
 	$query = urldecode($_GET['q']);

@@ -1,4 +1,3 @@
-#!/usr/local/bin/php
 <!DOCTYPE html>
 <html>
 	<head>
@@ -22,6 +21,9 @@
       }
     </style>
 		<script type="text/javascript">
+			$(document).ready(function() {
+				prettyPrint();
+			});
 			function slider(e,newValue) { 
 				document.getElementById(e).innerHTML=newValue;
 			}
@@ -44,7 +46,7 @@
 		</script>
 	</head>
 
-	<body  onload="prettyPrint()">
+	<body>
 
 		<div class="topbar">
 			<div class="fill">

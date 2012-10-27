@@ -1,4 +1,3 @@
-#!/usr/local/bin/php
 <!DOCTYPE html>
 <html>
 	<head>
@@ -80,6 +79,8 @@
 			google.setOnLoadCallback(drawVisualization);
 			function drawVisualization() {
 <?php
+include 'util.php';
+
 //error_reporting(E_ALL);
 //ini_set('display_errors', '1');
 // Build query
@@ -116,7 +117,8 @@ $query = "select (CASE WHEN ".
 error_log($query."\n\n------------", 3, 'query.log');
 
 // Connecting, selecting database
-$dbconn = pg_connect("host=128.227.176.46 dbname=madlibdb user=john password=madden options='--client_encoding=UTF8'")
+$_db = make_db_string();
+$dbconn = pg_connect("host=".$_db->{'host'}." dbname=".$_db->{'db'}." user=".$_db->{'user'}." password=".$_db->{'pwd'}." options='--client_encoding=UTF8'")
     or die('Could not connect: ' . pg_last_error());
 
 		list($tic_usec, $tic_sec) = explode(" ", microtime());

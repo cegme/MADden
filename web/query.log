@@ -1,0 +1,19 @@
+SELECT topKplayers.full_name, twtext, cgrant_sentiment(twtext) FROM tweets, (SELECT first || ' ' || last as full_name, total_yards, touchdowns FROM rushingstats ORDER BY total_yards DESC, touchdowns DESC LIMIT 5) as topKplayers WHERE cgrant_distance(1, topKplayers.full_name, 2, twtext, 5) > .5 LIMIT 50;
+
+5------------select (CASE WHEN (cgrant_distance(1,'Tebow',2, twtext, 5) > .5) THEN 'Tebow' ELSE 'Revis' END), created_at, cgrant_sentiment(twtext), twtext FROM tweets WHERE created_at between '10/02/2011' and '07/15/2012' AND ((cgrant_distance(1,'Tebow',2, twtext, 5) > .5) OR (cgrant_distance(1,'Revis',2, twtext, 5) > .5)) LIMIT 5 ;
+
+------------select (CASE WHEN (cgrant_distance(1,'Tebow',2, twtext, 5) > .5) THEN 'Tebow' ELSE 'Revis' END), created_at, cgrant_sentiment(twtext), twtext FROM tweets WHERE created_at between '10/02/2011' and '07/15/2012' AND ((cgrant_distance(1,'Tebow',2, twtext, 5) > .5) OR (cgrant_distance(1,'Revis',2, twtext, 5) > .5)) LIMIT 5 ;
+
+------------select termnum, term from cgrant_ne_chunk('Kirn began his career in psychology, graduating from UF with a master’s degree in clinical psychology in 1971 and a doctorate in the same subject in 1974. While at UF, he met his wife, Katrine, who also earned her doctorate in clinical psychology at UF. He worked in the mental health field for six years, first as an intern and later at community mental health centers and in a private practice in Kentucky that he owned with his wife. He also was a full-time faculty member at Bellarmine University in Louisville for six years', true) where tag = 'NE' ;
+
+4------------select termnum, term from cgrant_ne_chunk('Kirn began his career in psychology, graduating from UF with a master’s degree in clinical psychology in 1971 and a doctorate in the same subject in 1974. While at UF, he met his wife, Katrine, who also earned her doctorate in clinical psychology at UF. He worked in the mental health field for six years, first as an intern and later at community mental health centers and in a private practice in Kentucky that he owned with his wife. He also was a full-time faculty member at Bellarmine University in Louisville for six years', true) where tag = 'NE' ;
+
+4------------select termnum, term from cgrant_ne_chunk('Kirn began his career in psychology, graduating from UF with a master’s degree in clinical psychology in 1971 and a doctorate in the same subject in 1974. While at UF, he met his wife, Katrine, who also earned her doctorate in clinical psychology at UF. He worked in the mental health field for six years, first as an intern and later at community mental health centers and in a private practice in Kentucky that he owned with his wife. He also was a full-time faculty member at Bellarmine University in Louisville for six years', true) where tag = 'NE' ;
+
+4------------select termnum, term from cgrant_ne_chunk('I attend the University of Florida.', true) where tag = 'NE' ;
+
+4------------select termnum, term from cgrant_ne_chunk('Kirn began his career in psychology, graduating from UF with a master’s degree in clinical psychology in 1971 and a doctorate in the same subject in 1974. While at UF, he met his wife, Katrine, who also earned her doctorate in clinical psychology at UF. He worked in the mental health field for six years, first as an intern and later at community mental health centers and in a private practice in Kentucky that he owned with his wife. He also was a full-time faculty member at Bellarmine University in Louisville for six years', true) where tag = 'NE' ;
+
+4------------select termnum, term from cgrant_ne_chunk('I attend the University of Florida.', true) where tag = 'NE' ;
+
+4------------

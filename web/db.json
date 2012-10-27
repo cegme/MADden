@@ -1,8 +1,8 @@
 {
-	"host" : "localhost",
+	"host" : "128.227.176.46",
 	"db" : "madlibdb",
 	"port" : "5432",
-	"pwd" : "",
-	"user" : "",
+	"pwd" : "christan",
+	"user" : "cgrant",
 	"table" : "tweets"
 }
