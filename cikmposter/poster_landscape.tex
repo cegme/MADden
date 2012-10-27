@@ -197,7 +197,7 @@ We describe these principles through MADden.
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		   \newcommand{\compactlist}{\setlength{\itemsep}{0pt} \setlength{\parskip}{0pt} \setlength{\leftskip}{-1em}}
  
-We obtained sports data from the 2011 Nationala Football League (NFL) Season, POS data from CoNLL-2000 and moview review data from Cornell.
+We obtained sports data from the 2011 National Football League (NFL) Season, POS data from CoNLL-2000 and movie review data from Cornell.
 \begin{center}
 \begin{tabular}{|l|r|r|}
 \hline
@@ -286,9 +286,10 @@ Statistical and Probabilistic Functions
 
 CRFs are the state of art probabilistic models on a number of real-world tasks including NLP tasks 
 such as POS, NER. However CRF training is more computationally expensive due to the expensive 
-log-likelihood and gradient vector computation compared with MEMMs and HMMs. We use a Python UDF to drive the computation. Each iteration
-will calculate the log-likelihood and gradient vector over one document. Following the summation of the results, the LBFGS optimization is adopted
-to update the weight vector $\lambda$.\\
+log-likelihood and gradient vector computation compared with MEMMs and HMMs. We use a Python UDF to drive the computation until the stop criterion is met.
+ Within each iteration, we use user-defined
+aggregate functions to parallel the computation of the log-likelihood and gradient vector over all documents. At the end of each iteration, the LBFGS optimization is adopted
+to update the weight vector.\\
    %\begin{multicols}{2} 
 \begin{center}		             
       \includegraphics[height=9em]{images/crf}\\
