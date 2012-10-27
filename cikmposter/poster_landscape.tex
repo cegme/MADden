@@ -299,26 +299,6 @@ Statistical and Probabilistic Functions
 
 %We contribute the text analytics package.\\
 
-     \textbf{Text Analytics API}
-     %\textbf{\ Features}\vspace{-1.5mm}
-
-          We use $M$ table to encode edge features, position features and use $R$ table to encode single state features such as
-     dictionary features, regex features.\\ 
-		 {\centering
-     $M$ schema: $mtbl(prev\_label,label,value)$.\\
-     $R$ schema: $rtbl(seg\_text,label,value)$. \\
-		 }
-      %\includegraphics[height=7.02em]{images/m.png}\\
-      %\includegraphics[height=5.85em]{images/r.png}\\
-
-\fbox{
-        \parbox{0.95\linewidth}{%
-\textcolor{blue}{\bf $\bf Q_1$:Load CRF model API in MADlib}\\
-$SELECT$ $madlib.load\_crf\_model(args)$\\
-\textcolor{blue}{\bf $\bf Q_2$:Text feature extraction API in MADlib}\\
-$SELECT$ $madlib.text\_feature\_extraction(args)$
-        }%
-}\\
   \end{multicols}
 
 		
@@ -336,25 +316,17 @@ will calculate the log-likelihood and gradient vector over one document. Followi
 to update the weight vector $\lambda$.\\
    %\begin{multicols}{2} 
 \begin{center}		             
-      \includegraphics[height=6em]{images/crf}\\
+      \includegraphics[height=9em]{images/crf}\\
 \end{center}		             
-   %\begin{tabular}{lp{1.5cm}}
-      %\multicolumn{2}{c}{\textbf{LBFGS parameters}}\\
-      %\includegraphics[height=4.5em]{images/crf}\\
-      %\textbf{Mode} & In-database.\\
-      %\textbf{Entit} & Support for entity.\\ 
-      %\textbf{Sentiment} & Classification. \\
-   %\end{tabular}\\
-   %\end{multicols}
+
 \fbox{%
         \parbox{0.95\linewidth}{%
-\textcolor{green}{\bf Parallel CRF training algorithm}\\
-1.Evaluate the log-likelihood function and gradient vector\\
-$\ell_{\lambda_k}=\lambda F(y_k,x_k)-\log Z_\lambda(x_k)$(log-likelihood for doc. $k$)\\
-$\nabla \ell_{\lambda_k}=\lambda F(y_k,x_k)-E_{p\lambda(Y|x_k)}F(Y,x_k)$(gradient vector for doc. $k$)\\
+1.Evaluate the log-likelihood function and gradient vector for doc. $k$\\
+$\ell_{\lambda_k}=\lambda F(y_k,x_k)-\log Z_\lambda(x_k)$;
+$\nabla \ell_{\lambda_k}=\lambda F(y_k,x_k)-E_{p\lambda(Y|x_k)}F(Y,x_k)$\\
 2.Sum up over all documents \\
-$\ell_\lambda=\sum_k\ell_{\lambda_k}-\frac{\lambda^2}{2\sigma ^2}+const$(log-likelihood for all docs.)\\
-$\nabla \ell_\lambda=\sum_k\nabla \ell_{\lambda_k}-\frac{\lambda}{\sigma ^2}$(gradient vector for all docs.)\\
+$\ell_\lambda=\sum_k\ell_{\lambda_k}-\frac{\lambda^2}{2\sigma ^2}+const$;
+$\nabla \ell_\lambda=\sum_k\nabla \ell_{\lambda_k}-\frac{\lambda}{\sigma ^2}$\\
 3.Perform LBFGS optimization, a variation of quasi-Newton algorithm\\
 $lbfgs(\lambda,\ell_\lambda,\nabla \ell_\lambda,Hessian,other args)$\\
 4.Repeat step 1 and step2 until stop condition is satisfied
@@ -362,10 +334,25 @@ $lbfgs(\lambda,\ell_\lambda,\nabla \ell_\lambda,Hessian,other args)$\\
 }\\
 \fbox{%
         \parbox{0.95\linewidth}{%
-\textcolor{blue}{\bf $\bf Q_3$:Linear-chain CRF learning API in MADlib}\\
-$SELECT$ $madlib.linearchain\_CRF\_learning(args)$
+\textcolor{blue}{\bf $\bf Q_1$:Loading training data into database}\\
+$select$ $crf\_train\_data('/path/to/trainingdataset')$
         }%
 }\\
+\fbox{%
+        \parbox{0.95\linewidth}{%
+\textcolor{blue}{\bf $\bf Q_2$:Feature generation for training data}\\
+$select$ $crf\_train\_fgen('train\_segmenttbl', 'crf\_regex','crf\_dictionary',\\ 
+'featuretbl','crf\_feature\_dic')$
+        }%
+}\\
+\fbox{%
+        \parbox{0.95\linewidth}{%
+\textcolor{blue}{\bf $\bf Q_3$:Convex optimaization using LBFGS}\\
+$select$ $lincrf('featuretbl','sparse\_r','dense\_m','sparse\_m','f\_size',45, \\
+'crf\_feature\_dic','crf\_feature',20)$
+        }%
+}\\
+
 
   \end{multicols}
 		 
@@ -382,6 +369,14 @@ We chose to implement a Python UDF that uses iterations to drive the Viterbi inf
 finish the inference over one document.
 In Greenplum, Viterbi can be run in parallel over different subsets 
 of the document on a multi-core machine.
+\begin{center}		             
+  %\begin{multicols}{2}
+      \includegraphics[height=9em,width=14em]{images/viterbip}
+      \includegraphics[height=9em,width=14em]{images/result.png}\\
+  %\end{multicols}
+\end{center}	
+	             
+\fbox{%
 \[
 V(i,y) =
 \begin{cases}
@@ -389,44 +384,26 @@ V(i,y) =
  0, & \text{if } i=-1.
 \end{cases}
 \]
-\begin{center}		             
-  %\begin{multicols}{2}
-      \includegraphics[height=5em,width=11em]{images/viterbip}
-      \includegraphics[height=5em,width=11em]{images/result.png}\\
-  %\end{multicols}
-\end{center}		             
-%\begin{center}		             
-%      \includegraphics[height=8.75em]{images/result.png}\\
-%\end{center}		             
-%\fbox{%
-%        \parbox{0.95\linewidth}{%
-%$\max P(T_1,...,T_n|W_1,...,W_n)\approx\max\prod_{1\leq i\leq n} (P(T_i|T_{i-1})P(W_i|T_i))$\\
-%$P(T_i|T_{i-1})$ : two state(transition) feature weight\\
-%$P(W_i|T_i)$ : single state feature weight
-%        }%
-%}\\
+}\\
+
 \fbox{%
         \parbox{0.95\linewidth}{%
-\textcolor{blue}{\bf $\bf Q_4$:Viterbi inference API in MADlib}\\
-$SELECT$  $doc\_id, madlib.vcrf\_label(mfactors.score,rfactors.score)$\\
-$FROM$ \text{ } \text{ } $mfactors$, $rfactors$
+\textcolor{blue}{\bf $\bf Q_4$:Loading testing data into database}\\
+$select$ $crf\_test\_data('/path/to/testingdataset')$
         }%
 }\\
 \fbox{%
         \parbox{0.95\linewidth}{%
-\textcolor{blue}{\bf $\bf Q_{4_1}$:Tagging for sentence with $\bf id=501$}\\
-$SELECT$  $doc\_id, madlib.vcrf\_label(mfactors.score,rfactors.score)$\\
-$FROM$  \text{ } \text{ } $mfactors$, $rfactors$\\
-$WHERE$ $doc\_id=501$
+\textcolor{blue}{\bf $\bf Q_{5}$:Feature extraction for testing data }\\
+$select$ $crf\_test\_fgen('test\_segmenttbl','crf\_dictionary','crf\_label',\\
+'crf\_regex',' crf\_feature','viterbi\_mtbl','viterbi\_rtbl')$
         }%
 }\\
 \fbox{%
         \parbox{0.95\linewidth}{%
-\textcolor{blue}{\bf $\bf Q_{4_2}$:Tagging for all sentences containing the word 'professor'}\\
-$SELECT$ $doc\_id, madlib.vcrf\_label(mfactors.score,rfactors.score)$\\
-$FROM$   \text{ } \text{ } $mfactors$, $rfactors$, $seg\_tbl$\\
-$WHERE$ $seg\_text='professor'$ $AND$ $seg\_tbl.doc\_id=rfactor.doc\_id$
-%       \text{ } \text{ } \text{ } \text{ } \text{ } \text{ } \text{ } \text{ } \text{ }  $seg\_tbl.doc\_id=rfactor.doc\_id$
+\textcolor{blue}{\bf $\bf Q_{6}$:TOP1 viterbi inference}\\
+$select$ $vcrf\_label('test\_segmenttbl', 'viterbi\_mtbl','viterbi\_rtbl',\\ 
+                 'crf\_label', 'extraction')$
         }%
 }\\
 
