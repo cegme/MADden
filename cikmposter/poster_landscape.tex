@@ -221,15 +221,13 @@ CoNLL-2000 & 30,000 & 3 MB \\
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                   \headerbox{Queries}{name=myqueries, column=0,below=myintroduction}{
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-								We can use UDFs and use external libraries.
-
-								Here is an example query for part-of-speech tagging.\\
-\textit{SELECT term, pos}\\
-\textit{FROM postag(<text>)};
-
-								Here is a function for named-entity recognition.\\
-\textit{SELECT term, tag}\\
-\textit{FROM ne\_chunk(<text>);}
+								We can use UDFs and use external libraries to perform computations.
+								Here is an example query for part-of-speech tagging:\\
+\indent \textit{SELECT term, pos}\\
+\indent \textit{FROM postag(<text>)};\\
+								Here is a function for named-entity recognition:\\
+\indent \textit{SELECT term, tag}\\
+\indent \textit{FROM ne\_chunk(<text>);}
 
 }
 
@@ -398,6 +396,7 @@ Christan Grant is funded by a National
 Science Foundation Graduate Research Fellowship under Grant No. DGE-0802270.
 This work was supported by a gift from EMC Greenplum.
 Thanks to C. Welton and H. Harada's code review, S. Sarawagi's work on a CRF package and N. Okazaki's work on a LBFGS implementation.
+See \url{http://dsr.cise.ufl.edu} for more details.
 	  	}
 
 
