@@ -9,7 +9,11 @@ function getQueryPlan($conn, $query) {
 
 	$result = pg_query("EXPLAIN ".$query);
 
-	$arr = pg_fetch_all($result);
+	//$arr = pg_fetch_all($result);
+	$arr = array();
+	while ($row = pg_fetch_row($result)) {
+		array_push($arr, $row[0]);
+	}
 
 	return $arr;
 }
