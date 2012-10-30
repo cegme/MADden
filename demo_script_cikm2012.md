@@ -182,7 +182,7 @@ for structured and unstructured data. MADlib is a product of collaboration betwe
 Wisconsin, University of Florida and Greenplum.  
 As one of the contributors, we developped a linear-chain conditional random field(CRF) learning and
 inference module for part of speech tagging. CRFs 
-are the state of art probabilistic models on a number of real-world
+are the state of art probabilistic graphical models on a number of real-world
 tasks such as POS, NER. Now I will demo two APIs supported in MADlib for part of
 speech tagging.
 
@@ -191,17 +191,17 @@ CRF training is a convex optimization process involving mutiple iterations.
 We use a Python UDF to drive the computation until the stop criterion is met. Within each
 iteration, we use user-deﬁned aggregate functions to parallel the computation
 of the log-likelihood and gradient vector over all documents. At the end of
-each iteration, the weight vector is updated using the LBFGS convex optimization method.
+each iteration, the weight vector is updated using the limited-memory BFGS convex optimization method.
 
 crf_train_data function is to load the training data into the database.
 crf_train_fgen function will generate all features for training data.
-lincrf function is to optimize the CRF model using LBFGS convex optimization method.
+lincrf function is to optimize the CRF model using limited-memory BFGS convex optimization method.
 You can specify the number of iterations you want the optimization method to run.
 
     set search_path=madlib,madlib;
     select crf_train_data('/home/gpadmin/demo/crf/crf_train_data/trainingdataset');
     select crf_train_fgen('train_segmenttbl', 'crf_regex','crf_dictionary', 'featuretbl','crf_feature_dic');
-    select lincrf('featuretbl','sparse_r','dense_m','sparse_m','f_size',45, 'crf_feature_dic','crf_feature',20);
+    select lincrf('featuretbl','sparse_r','dense_m','sparse_m','f_size',45, 'crf_feature_dic','crf_feature',40);
 
 #### 4. Parallel TOP1 linear-chain CRF Viterbi inference.
 The Viterbi algorithm is the popular algorithm to ﬁnd the top-k most likely
