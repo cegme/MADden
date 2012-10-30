@@ -180,10 +180,10 @@ MADlib is an open-source library for scalable in-database analytics.
 It provides data-parallel implementations of mathematical, statistical and machine-learning methods
 for structured and unstructured data. MADlib is a product of collaboration between Berkeley, University of 
 Wisconsin, University of Florida and Greenplum.  
-As one of the contributors, we contributed a linear-chain conditional random field(CRF) learning and
-inference module to MADlib for part of speech tagging. CRFs 
+As one of the contributors, we developped a linear-chain conditional random field(CRF) learning and
+inference module for part of speech tagging. CRFs 
 are the state of art probabilistic models on a number of real-world
-tasks including NLP tasks such as POS, NER. I will demo two APIs supported in MADlib for part of
+tasks such as POS, NER. Now I will demo two APIs supported in MADlib for part of
 speech tagging.
 
 #### 3. Parallel linear-chain CRF training.
