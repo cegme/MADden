@@ -174,12 +174,23 @@ Here is an example of this function execution.
 
 
 #### 3. Parallel linear-chain CRF training for part of speech tagging.
+CRFs are the state of art probabilistic models on a number of real-world
+tasks including NLP tasks such as POS, NER. We use a Python
+UDF to drive the computation until the stop criterion is met. Within each
+iteration, we use user-deﬁned aggregate functions to parallel the computation
+of the log-likelihood and gradient vector over all documents. At the end of
+each iteration, the LBFGS optimization is adopted to update the weight vector
+
     set search_path=madlib,madlib;
     select crf_train_data('/home/gpadmin/demo/crf/crf_train_data/trainingdataset');
     select crf_train_fgen('train_segmenttbl', 'crf_regex','crf_dictionary', 'featuretbl','crf_feature_dic');
     select lincrf('featuretbl','sparse_r','dense_m','sparse_m','f_size',45, 'crf_feature_dic','crf_feature',20);
 
 #### 4. Parallel TOP1 linear-chain CRF Viterbi inference for part of speech tagging.
+The Viterbi algorithm is the popular algorithm to ﬁnd the top-k most likely
+labelings of a document for CRF models. We chose to implement a SQL statement
+to drive the Viterbi inference. SQL is inherently parallel due to the set operation over relations
+In Greenplum, Viterbi can be run in parallel over different subsets of the document on a multi-core machine.
     select crf_test_data('/home/gpadmin/demo/crf/crf_test_data/testingdataset');
     select crf_test_fgen('test_segmenttbl','crf_dictionary','crf_label','crf_regex',' crf_feature','viterbi_mtbl','viterbi_rtbl');
     select vcrf_label('test_segmenttbl', 'viterbi_mtbl','viterbi_rtbl', 'crf_label', 'extraction');
