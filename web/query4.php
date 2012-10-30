@@ -140,9 +140,10 @@ error_log($query."\n\n4------------", 3, 'query.log');
 							}
 							echo "</table>\n";
 						?>
-						<pre>
-						<? echo join("\n",$queryplan); ?>
-						</pre>
+<h3>Query Plan</h3>
+<pre>
+<? echo join("\n",$queryplan); ?>
+</pre>
           </div>
           <div class="span4">
             <h3>The Query</h3>
