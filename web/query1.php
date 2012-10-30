@@ -124,7 +124,7 @@ $query = "select cgrant_sentiment(twtext) as sent, twtext, twuser_id_str, id_str
 
 			<div class="content">
         <div class="page-header">
-				<h1>John Madden says <?php echo $_GET["q"];?>	
+				<h1><!--John Madden says --> <?php echo $_GET["q"];?>	
 					<small>...</small>
 				</h1>
         </div>
