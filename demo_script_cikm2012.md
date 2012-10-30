@@ -179,7 +179,7 @@ tasks including NLP tasks such as POS, NER. We use a Python
 UDF to drive the computation until the stop criterion is met. Within each
 iteration, we use user-deﬁned aggregate functions to parallel the computation
 of the log-likelihood and gradient vector over all documents. At the end of
-each iteration, the LBFGS optimization is adopted to update the weight vector
+each iteration, the LBFGS optimization is adopted to update the weight vector.
 
     set search_path=madlib,madlib;
     select crf_train_data('/home/gpadmin/demo/crf/crf_train_data/trainingdataset');
@@ -189,7 +189,7 @@ each iteration, the LBFGS optimization is adopted to update the weight vector
 #### 4. Parallel TOP1 linear-chain CRF Viterbi inference for part of speech tagging.
 The Viterbi algorithm is the popular algorithm to ﬁnd the top-k most likely
 labelings of a document for CRF models. We chose to implement a SQL statement
-to drive the Viterbi inference. SQL is inherently parallel due to the set operation over relations
+to drive the Viterbi inference. SQL is inherently parallel due to the set operation over relations.
 In Greenplum, Viterbi can be run in parallel over different subsets of the document on a multi-core machine.
 
     select crf_test_data('/home/gpadmin/demo/crf/crf_test_data/testingdataset');
