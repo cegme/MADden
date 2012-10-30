@@ -189,7 +189,7 @@ each iteration, the weight vector is updated using the LBFGS convex optimization
 crf_train_data function is to load the training data into the database.
 crf_train_fgen function is to generate all features for training data.
 lincrf function is to optimize the CRF model using LBFGS convex optimization method.
-You can specify the number of iterations you want to run the optimization method.
+You can specify the number of iterations you want the optimization method to run.
 
     set search_path=madlib,madlib;
     select crf_train_data('/home/gpadmin/demo/crf/crf_train_data/trainingdataset');
