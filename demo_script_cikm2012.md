@@ -173,13 +173,13 @@ Here is an example of this function execution.
     (10 rows)
 
 
-#### 3. Parallel linear-chain CRF training for Part-of-speech tagging.
+#### 3. Parallel linear-chain CRF training for part of speech tagging.
     set search_path=madlib,madlib;
     select crf_train_data('/home/gpadmin/demo/crf/crf_train_data/trainingdataset');
     select crf_train_fgen('train_segmenttbl', 'crf_regex','crf_dictionary', 'featuretbl','crf_feature_dic');
     select lincrf('featuretbl','sparse_r','dense_m','sparse_m','f_size',45, 'crf_feature_dic','crf_feature',20);
 
-#### 4. Parallel TOP1 linear-chain CRF Viterbi inference for Part-of-speech tagging.
+#### 4. Parallel TOP1 linear-chain CRF Viterbi inference for part of speech tagging.
     select crf_test_data('/home/gpadmin/demo/crf/crf_test_data/testingdataset');
     select crf_test_fgen('test_segmenttbl','crf_dictionary','crf_label','crf_regex',' crf_feature','viterbi_mtbl','viterbi_rtbl');
     select vcrf_label('test_segmenttbl', 'viterbi_mtbl','viterbi_rtbl', 'crf_label', 'extraction');
