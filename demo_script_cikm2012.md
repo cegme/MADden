@@ -173,7 +173,7 @@ Here is an example of this function execution.
     (10 rows)
 
 
-CRFs are the state of art probabilistic models on a number of real-world
+### CRFs are the state of art probabilistic models on a number of real-world
 tasks including NLP tasks such as POS, NER. We contributed a linear-chain CRF learning and 
 inference modules to MADlib which is an open-source library for scalable in-database analytics. 
 
