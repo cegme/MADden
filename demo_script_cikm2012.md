@@ -178,8 +178,7 @@ Welcome to the demo part 2. In this part, I will demo a parallel in-database imp
 linear-chain conditional random filed learning and inference for part of speech tagging. Let me first give an biref introduction to MADlib and CRF.
 MADlib is an open-source library for scalable in-database analytics.
 It provides data-parallel implementations of mathematical, statistical and machine-learning methods
-for structured and unstructured data. MADlib is a product of collaboration between Berkeley, University of 
-Wisconsin, University of Florida and Greenplum.  
+for structured and unstructured data. 
 As one of the contributors, we developped a linear-chain conditional random field(CRF) learning and
 inference module for part of speech tagging. CRFs 
 are the state of art probabilistic graphical models on a number of real-world
@@ -188,7 +187,7 @@ speech tagging.
 
 #### 3. Parallel linear-chain CRF training.
 CRF training is a convex optimization process involving mutiple iterations. 
-We use a Python UDF to drive the computation until the stop criterion is met. Within each
+We use a Python UDF to drive the computation. Within each
 iteration, we use user-deﬁned aggregate functions to parallel the computation
 of the log-likelihood and gradient vector over all documents. At the end of
 each iteration, the weight vector is updated using the limited-memory BFGS convex optimization method.
@@ -207,7 +206,6 @@ You can specify the number of iterations you want the optimization method to run
 The Viterbi algorithm is the popular algorithm to ﬁnd the top-k most likely
 labelings of a document for CRF models. We chose to implement a SQL statement
 to drive the Viterbi inference. SQL is inherently parallel due to the set operation over relations.
-In Greenplum, Viterbi can be run in parallel over different subsets of the document on a multi-core machine.
 
 crf_test_data function is used to load the testing data into the database.
 crf_train_fgen function will generates all features for testing data.
