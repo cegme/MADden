@@ -55,7 +55,7 @@
 					<ul class="nav">
 						<li class="active"><a href="#">Home</a></li>
 						<li><a href="http://www.cise.ufl.edu/class/cis6930fa11lad/">cis6930fa11lad</a></li>
-						<li><a href="https://github.com/SakuraSound/MADden">The Code</a></li>
+						<li><a href="https://github.com/cegme/MADden">The Code</a></li>
 					</ul><!-- .nav -->
 				</div> <!-- .container -->
 			</div> <!-- .fill -->
@@ -65,7 +65,7 @@
 		<div class="container">
 	
 			<div class="hero-unit">
-				<h1>MADden: In-Database Text Analytics</h1>
+				<h1>MADden: Query-Driven Statistical Text Analytics</h1>
 			</div> <!-- .hero-unit -->
 
 			<div class="row">
@@ -111,11 +111,11 @@
 						results.
 						<input name="q" type="submit" class="primary btn" value="Query 2"/>
 						<br/>
-					</form>
+					</form> 
 
 					<hr/>
 
-					<!-- query 3 -->
+					<!-- query 3 
 					<form action="query3.php" method="GET">
 						Give me the
 						<select name="sent" type="normalSelect" class="mini">
@@ -135,7 +135,7 @@
 						</select>
 						for tweets.<br/> 
 						<input name="q" type="submit" class="primary btn" value="Query 3"/>
-					</form>
+					</form> -->
 
 					<hr/>
 					<!-- query 4 -->
@@ -148,7 +148,7 @@ Kirn began his career in psychology, graduating from UF with a master’s degree
 					</form>
 
 
-					<form action="query5.php" method="GET">
+					<!-- <form action="query5.php" method="GET">
 					Give me the
 						<input name="num"  class="small" type="range" min="1" max="100" value="50" step="1"
 						onchange="slider('51range',this.value)"/>
@@ -165,7 +165,7 @@ Kirn began his career in psychology, graduating from UF with a master’s degree
 						</select>
 					.
 						<input name="q" type="submit" class="primary btn" value="Query 5"/>
-					</form>
+					</form> -->
 
 
 					<hr/>
@@ -178,6 +178,9 @@ Kirn began his career in psychology, graduating from UF with a master’s degree
 		</div> <!-- .container -->
 
 	</body>
+<footer>
+* Some queries commented out or ommitted because of latency issues *
+</footer>
 
 
 </html>
