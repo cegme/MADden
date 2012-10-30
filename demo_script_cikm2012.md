@@ -191,6 +191,7 @@ The Viterbi algorithm is the popular algorithm to ﬁnd the top-k most likely
 labelings of a document for CRF models. We chose to implement a SQL statement
 to drive the Viterbi inference. SQL is inherently parallel due to the set operation over relations
 In Greenplum, Viterbi can be run in parallel over different subsets of the document on a multi-core machine.
+
     select crf_test_data('/home/gpadmin/demo/crf/crf_test_data/testingdataset');
     select crf_test_fgen('test_segmenttbl','crf_dictionary','crf_label','crf_regex',' crf_feature','viterbi_mtbl','viterbi_rtbl');
     select vcrf_label('test_segmenttbl', 'viterbi_mtbl','viterbi_rtbl', 'crf_label', 'extraction');
