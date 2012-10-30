@@ -174,6 +174,8 @@ Here is an example of this function execution.
 
 
 ### CRFs and MADlib introduction
+Welcome to the demo part 2. In this part, I will demo a parallel in-database implementation of 
+linear-chain conditional random filed learning and inference for part of speech tagging. Let me first give an biref introduction to MADlib and CRF.
 MADlib is an open-source library for scalable in-database analytics.
 It provides data-parallel implementations of mathematical, statistical and machine-learning methods
 for structured and unstructured data. MADlib is a product of collaboration between Berkeley, University of 
