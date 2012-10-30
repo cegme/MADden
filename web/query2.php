@@ -193,7 +193,7 @@ $dbconn = pg_connect("host=".$_db->{'host'}." dbname=".$_db->{'db'}." user=".$_d
 
 			<div class="content">
         <div class="page-header">
-				<h1>John Madden says <?php echo $_GET["q"];?>	
+				<h1><!--John Madden says --> <?php echo $_GET["q"];?>	
 					<small>...</small>
 				</h1>
         </div>
