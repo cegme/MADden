@@ -122,7 +122,7 @@ error_log($query."\n\n4------------", 3, 'query.log');
 
 			<div class="content">
         <div class="page-header">
-				<h1>John Madden says <?php echo $_GET["q"];?>	
+				<h1><!--John Madden says --> <?php echo $_GET["q"];?>	
 					<small>...</small>
 				</h1>
         </div>
