@@ -173,11 +173,12 @@ Here is an example of this function execution.
     (10 rows)
 
 
-#### 3. Parallel linear-chain CRF training for part of speech tagging.
 CRFs are the state of art probabilistic models on a number of real-world
 tasks including NLP tasks such as POS, NER. We contributed a linear-chain CRF learning and 
-inference module to MADlib which is an open-source library for scalable in-database analytics. We use a Python
-UDF to drive the computation until the stop criterion is met. Within each
+inference modules to MADlib which is an open-source library for scalable in-database analytics. 
+
+#### 3. Parallel linear-chain CRF training for part of speech tagging.
+We use a Python UDF to drive the computation until the stop criterion is met. Within each
 iteration, we use user-deﬁned aggregate functions to parallel the computation
 of the log-likelihood and gradient vector over all documents. At the end of
 each iteration, the LBFGS optimization is adopted to update the weight vector.
