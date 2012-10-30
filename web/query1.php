@@ -118,6 +118,8 @@ $query = "select cgrant_sentiment(twtext) as sent, twtext, twuser_id_str, id_str
 		$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 		list($toc_usec, $toc_sec) = explode(" ", microtime());
 		$querytime = $toc_sec + $toc_usec - ($tic_sec + $tic_usec);
+
+		$queryplan = getQueryPlan($dbconn, $query);
 ?>	
 
 			<div class="content">
@@ -162,6 +164,9 @@ $query = "select cgrant_sentiment(twtext) as sent, twtext, twuser_id_str, id_str
 							}
 							echo "</table>\n";
 						?>
+						<pre>
+						<? echo join("\n",$queryplan); ?>
+						</pre>
           </div>
           <div class="span4">
             <h3>The Query</h3>
