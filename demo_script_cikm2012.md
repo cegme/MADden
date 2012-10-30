@@ -185,8 +185,9 @@ We use a Python UDF to drive the computation until the stop criterion is met. Wi
 iteration, we use user-deﬁned aggregate functions to parallel the computation
 of the log-likelihood and gradient vector over all documents. At the end of
 each iteration, the weight vector is updated using the LBFGS convex optimization method.
-crf_train_data function is to load the training data into the database
-crf_train_fgen function is to generate all features for training data
+
+crf_train_data function is to load the training data into the database.
+crf_train_fgen function is to generate all features for training data.
 lincrf function is to optimize the CRF model using LBFGS convex optimization method.
 You can specify the number of iterations you want to run the optimization method.
 
@@ -201,8 +202,8 @@ labelings of a document for CRF models. We chose to implement a SQL statement
 to drive the Viterbi inference. SQL is inherently parallel due to the set operation over relations.
 In Greenplum, Viterbi can be run in parallel over different subsets of the document on a multi-core machine.
 
-crf_test_data function is to load the testing data into the database
-crf_train_fgen function is to generate all features for testing data
+crf_test_data function is to load the testing data into the database.
+crf_train_fgen function is to generate all features for testing data.
 vcrf_label function is to calculate the top1 label sequence and the corresponding conditional probability.
 
     select crf_test_data('/home/gpadmin/demo/crf/crf_test_data/testingdataset');
