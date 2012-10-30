@@ -9,7 +9,7 @@ We grabbed some weekend tweets based on football terms.
 
 ### Queries
 
-#### 1. Give me 5 comments about a 'Tebow'  with 'negative' sentiment.
+#### 1. Give me 5 comments about 'Tebow' with 'negative' sentiment.
 
 
 We first need a way to perform sentiment analysis from tweets.
@@ -98,7 +98,7 @@ Lets start by creating a function to tag a block of text with part of speech.
     import nltk
     return nltk.pos_tag(nltk.word_tokenize(doc))
     $$
-    	LANGUAGE plpythonu VOLATILE;
+    	LANGUAGE plpythonu IMMUTABLE;
 
 We first tokenize and then keep the part of speech tag.
 Notice we first create a type `pair` that represents output of the function.
@@ -174,12 +174,17 @@ Here is an example of this function execution.
 
 
 ### CRFs and MADlib introduction
-Conditional random fields(CRFs) are the state of art probabilistic models on a number of real-world
-tasks including NLP tasks such as POS, NER. We contributed a linear-chain CRF learning and 
-inference module to MADlib which is an open-source library for scalable in-database analytics. 
-MADlib can be installed on Postgres and Greenplum database.
+MADlib is an open-source library for scalable in-database analytics.
+It provides data-parallel implementations of mathematical, statistical and machine-learning methods
+for structured and unstructured data. MADlib is a product of collaboration between Berkeley, University of 
+Wisconsin, University of Florida and Greenplum.  
+As one of the contributors, we contributed a linear-chain conditional random field(CRF) learning and
+inference module to MADlib for part of speech tagging. CRFs 
+are the state of art probabilistic models on a number of real-world
+tasks including NLP tasks such as POS, NER. I will demo two APIs supported in MADlib for part of
+speech tagging.
 
-#### 3. Parallel linear-chain CRF training for part of speech tagging.
+#### 3. Parallel linear-chain CRF training.
 CRF training is a convex optimization process involving mutiple iterations. 
 We use a Python UDF to drive the computation until the stop criterion is met. Within each
 iteration, we use user-deﬁned aggregate functions to parallel the computation
@@ -196,7 +201,7 @@ You can specify the number of iterations you want the optimization method to run
     select crf_train_fgen('train_segmenttbl', 'crf_regex','crf_dictionary', 'featuretbl','crf_feature_dic');
     select lincrf('featuretbl','sparse_r','dense_m','sparse_m','f_size',45, 'crf_feature_dic','crf_feature',20);
 
-#### 4. Parallel TOP1 linear-chain CRF Viterbi inference for part of speech tagging.
+#### 4. Parallel TOP1 linear-chain CRF Viterbi inference.
 The Viterbi algorithm is the popular algorithm to ﬁnd the top-k most likely
 labelings of a document for CRF models. We chose to implement a SQL statement
 to drive the Viterbi inference. SQL is inherently parallel due to the set operation over relations.
