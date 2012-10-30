@@ -180,6 +180,7 @@ inference module to MADlib which is an open-source library for scalable in-datab
 MADlib can be installed on Postgres and Greenplum database.
 
 #### 3. Parallel linear-chain CRF training for part of speech tagging.
+CRF training is a convex optimization process involving mutiple iterations. 
 We use a Python UDF to drive the computation until the stop criterion is met. Within each
 iteration, we use user-deﬁned aggregate functions to parallel the computation
 of the log-likelihood and gradient vector over all documents. At the end of
