@@ -176,7 +176,8 @@ Here is an example of this function execution.
 ### CRFs and MADlib introduction
 CRFs are the state of art probabilistic models on a number of real-world
 tasks including NLP tasks such as POS, NER. We contributed a linear-chain CRF learning and 
-inference modules to MADlib which is an open-source library for scalable in-database analytics. 
+inference module to MADlib which is an open-source library for scalable in-database analytics. 
+MADlib can be installed on Postgres and Greenplum databases
 
 #### 3. Parallel linear-chain CRF training for part of speech tagging.
 We use a Python UDF to drive the computation until the stop criterion is met. Within each
