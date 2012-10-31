@@ -97,17 +97,17 @@
 					<!-- query 2 -->
 					<form action="query2.php" method="GET">
 						Compare players 
-						<input type="text" name="player1" class="small"/>
+						<input type="text" name="player1" class="small" value="tebow"/>
 						and 
-						<input type="text" name="player2" class="small"/> 
+						<input type="text" name="player2" class="small" value="revis"/> 
 						by the twitter sentiment over dates from  
-						<input type="text" id="from1" name="from1" class="mini"/>
+						<input type="text" id="from1" name="from1" class="mini" value="10/22/2011"/>
 						to
-						<input type="text" id="to1" name="to1" class="mini"/>
+						<input type="text" id="to1" name="to1" class="mini" value="10/27/2011"/>
 						and return
 						<input name="num"  class="small" type="range" min="1" max="100" value="5" step="1"
 						onchange="slider('2range',this.value)"/>
-						<span id="2range">20</span> 
+						<span id="2range">5</span> 
 						results.
 						<input name="q" type="submit" class="primary btn" value="Query 2"/>
 						<br/>
