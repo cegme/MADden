@@ -202,7 +202,7 @@ You can specify the number of iterations you want the optimization method to run
     select crf_train_fgen('train_segmenttbl', 'crf_regex','crf_dictionary', 'featuretbl','crf_feature_dic');
     select lincrf('featuretbl','sparse_r','dense_m','sparse_m','f_size',45, 'crf_feature_dic','crf_feature',40);
 
-Now we have the trained CRF model loaded into out Greenplum database.
+Now we have the trained CRF model loaded into our Greenplum database.
 This is the end of the first API.
 
 #### 4. Parallel TOP1 linear-chain CRF Viterbi inference.
@@ -211,7 +211,9 @@ labelings of a document for CRF models. We chose to implement a SQL statement
 to drive the Viterbi inference. SQL is inherently parallel due to the set operation over relations.
 
 crf_test_data function is used to load the testing data into the database.
+The test data is 100K sentences also from the CoNL data set.
 crf_train_fgen function will generates all features for testing data.
+We use the same feature set that we trained the model on.
 vcrf_label function is to calculate the top1 label sequence and the corresponding conditional probability.
 
     select crf_test_data('/home/gpadmin/demo/crf/crf_test_data/testingdataset');
