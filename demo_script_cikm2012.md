@@ -1,5 +1,4 @@
 
-
 ## Statistical text processing
 
 ### Data Sets
@@ -175,14 +174,14 @@ Here is an example of this function execution.
 
 ### CRFs and MADlib introduction
 Welcome to the demo part 2. In this part, I will demo a parallel in-database implementation of 
-linear-chain conditional random filed learning and inference for part of speech tagging. Let me first give an biref introduction to MADlib and CRF.
+linear-chain conditional random field learning and inference for part of speech tagging. Let me first give an biref introduction to MADlib and CRF.
 MADlib is an open-source library for scalable in-database analytics.
 It provides data-parallel implementations of mathematical, statistical and machine-learning methods
 for structured and unstructured data. 
-As one of the contributors, we developped a linear-chain conditional random field(CRF) learning and
-inference module for part of speech tagging. CRFs 
+As one of the contributors, we developped learning and inference modules for part of speech tagging using linear-chain CRFs.
+CRFs 
 are the state of art probabilistic graphical models on a number of real-world
-tasks such as POS, NER. Now I will demo two APIs supported in MADlib for part of
+tasks such as POS as NER. Now I will demo the two APIs supported in MADlib for part of
 speech tagging.
 
 #### 3. Parallel linear-chain CRF training.
