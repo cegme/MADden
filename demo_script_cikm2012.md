@@ -1,4 +1,3 @@
-
 ## Statistical text processing
 
 ### Data Sets
@@ -192,7 +191,9 @@ of the log-likelihood and gradient vector over all documents. At the end of
 each iteration, the weight vector is updated using the limited-memory BFGS convex optimization method.
 
 crf_train_data function is to load the training data into the database.
+We are loading 2000 trained sentences from the CoNLL data set.
 crf_train_fgen function will generate all features for training data.
+These features include regular expression features, sentence-edge features, dictionay features and several others.
 lincrf function is to optimize the CRF model using limited-memory BFGS convex optimization method.
 You can specify the number of iterations you want the optimization method to run.
 
@@ -200,6 +201,9 @@ You can specify the number of iterations you want the optimization method to run
     select crf_train_data('/home/gpadmin/demo/crf/crf_train_data/trainingdataset');
     select crf_train_fgen('train_segmenttbl', 'crf_regex','crf_dictionary', 'featuretbl','crf_feature_dic');
     select lincrf('featuretbl','sparse_r','dense_m','sparse_m','f_size',45, 'crf_feature_dic','crf_feature',40);
+
+Now we have the trained CRF model loaded into out Greenplum database.
+This is the end of the first API.
 
 #### 4. Parallel TOP1 linear-chain CRF Viterbi inference.
 The Viterbi algorithm is the popular algorithm to ﬁnd the top-k most likely
