@@ -3,6 +3,6 @@
 	"db" : "madlibdb",
 	"port" : "5432",
 	"pwd" : "",
-	"user" : "cgrant",
+	"user" : "john",
 	"table" : "tweets"
 }
